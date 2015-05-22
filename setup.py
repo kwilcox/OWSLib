@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from setuptools import setup, find_packages
 import owslib
 from setuptools.command.test import test as TestCommand
+import os
 import sys
 
 class PyTest(TestCommand):
@@ -14,7 +15,12 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
-readme = open('README.md').read()
+readme = 'http://geopython.github.io/OWSLib'
+if os.path.exists('README.txt'):
+    readme = open('README.txt').read()
+elif os.path.exists('README.md'):
+    readme = open('README.md').read()
+
 reqs = [line.strip() for line in open('requirements.txt')]
 
 if sys.version[:3] < '2.7':
