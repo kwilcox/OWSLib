@@ -11,7 +11,7 @@ Initialize CSW client
 
     # connect to CSW, explore it's properties
     #endpoint = 'http://data.nodc.noaa.gov/geoportal/csw'  # NODC Geoportal: collection level
-    #endpoint = 'http://geodiscover.cgdi.ca/wes/serviceManagerCSW/csw'  # NRCAN 
+    #endpoint = 'http://geodiscover.cgdi.ca/wes/serviceManagerCSW/csw'  # NRCAN
     #endpoint = 'http://geoport.whoi.edu/gi-cat/services/cswiso' # USGS Woods Hole GI_CAT
     #endpoint = 'http://cida.usgs.gov/gdp/geonetwork/srv/en/csw' # USGS CIDA Geonetwork
     #endpoint = 'http://www.nodc.noaa.gov/geoportal/csw'   # NODC Geoportal: granule level
@@ -22,7 +22,7 @@ Initialize CSW client
     # define some var
     >>> AOOS = '1706F520-2647-4A33-B7BF-592FAFDE4B45'
     >>> bbox = [-141,42,-52,84]
-    
+
     # Test new function getrecords2()
     >>> uuid = fes.PropertyIsEqualTo(propertyname='sys.siteuuid', literal='{%s}' % AOOS)
     >>> timeRange = fes.PropertyIsBetween(propertyname='apiso:modified', lower='2009-02-01', upper='2015-02-01')
@@ -86,11 +86,11 @@ Initialize CSW client
     ... <csw:Constraint version="1.1.0">
     ...   <ogc:Filter>
     ...     <ogc:And>
-    ...        <ogc:PropertyIsLike wildCard="*" escape="\" singleChar="?"> 
+    ...        <ogc:PropertyIsLike wildCard="*" escape="\" singleChar="?">
     ...          <ogc:PropertyName>apiso:ServiceType</ogc:PropertyName>
     ...          <ogc:Literal>*opendap*</ogc:Literal>
     ...        </ogc:PropertyIsLike>
-    ...     </ogc:And> 
+    ...     </ogc:And>
     ...    </ogc:Filter>
     ... </csw:Constraint>
     ...  </csw:Query>
@@ -103,7 +103,7 @@ Initialize CSW client
     True
     >>> c.results['nextrecord'] == 11
     True
-    
+
     ##########################################################
     # Test 6
     # construct a request by setting SAME constraint with Test 1
