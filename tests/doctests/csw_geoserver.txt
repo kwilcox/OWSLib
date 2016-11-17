@@ -1,5 +1,8 @@
 >>> from __future__ import (absolute_import, division, print_function)
 >>> from owslib.csw import CatalogueServiceWeb
+>>> from owslib.csw import CswRecord
+>>> import six
+
 >>> c=CatalogueServiceWeb('http://gis.armf.bg:8080/geoserver/csw')
 >>> c.getrecords2(typenames='csw:Record')
 >>> c.results.get('returned') > 0
@@ -7,4 +10,9 @@ True
 >>> c.results.get('nextrecord') > 0
 True
 >>> c.results.get('matches') > 0
+True
+>>> key, rec = c.records.popitem()
+>>> isinstance(rec, CswRecord)
+True
+>>> isinstance(rec.xml, six.string_types)
 True

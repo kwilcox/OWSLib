@@ -1,10 +1,12 @@
 Imports
 
     >>> from __future__ import (absolute_import, division, print_function)
-    >>> from owslib import fes    
-    >>> from owslib.dif import namespaces 
+    >>> from owslib import fes
+    >>> from owslib.dif import namespaces
     >>> from owslib.csw import CatalogueServiceWeb as cs
     >>> from owslib.etree import etree
+    >>> from owslib.csw import CswRecord
+    >>> import six
 
     >>> c=cs('http://data.linz.govt.nz/services/csw/',timeout=30)
     >>> c.identification.title
@@ -61,5 +63,10 @@ Imports
     0
     >>> sort_by=fes.SortBy([fes.SortProperty("dc:title", "ASC")])
     >>> c.getrecords2([prop], outputschema='http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/', maxrecords=2, sortby=sort_by)
-    >>> c.records['3cb46f76-e8d7-65ac-8b41-055675021f7b'].title
+    >>> rec = c.records['3cb46f76-e8d7-65ac-8b41-055675021f7b']
+    >>> rec.title
     'NZ Ross Dependency Glacial Lake Polygons (ANT, 1:50k)'
+    >>> isinstance(rec, CswRecord)
+    True
+    >>> isinstance(rec.xml, six.string_types)
+    True

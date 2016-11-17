@@ -3,6 +3,8 @@ Import, setup
     >>> from __future__ import (absolute_import, division, print_function)
     >>> from owslib import fes, csw
     >>> from owslib.dif import namespaces
+    >>> from owslib.csw import CswRecord
+    >>> import six
 
     >>> c = csw.CatalogueServiceWeb('http://www.ngdc.noaa.gov/geoportal/csw', timeout=120)
     >>> c.identification.title
@@ -34,4 +36,8 @@ Get some records
     >>> c.getService_urls(sos_urn)
     ['http://sos.aoos.org/sos/sos/kvp?service=SOS&request=GetCapabilities&acceptVersions=1.0.0']
 
-
+    >>> key, rec = c.records.popitem()
+    >>> isinstance(aoos_sos, CswRecord)
+    True
+    >>> isinstance(aoos_sos.xml, six.string_types)
+    True

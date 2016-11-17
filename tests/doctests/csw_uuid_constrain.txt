@@ -4,7 +4,9 @@ Imports
     >>> from xml.dom import minidom as md
     >>> from owslib import fes, csw
     >>> from tests.utils import compare_xml
-    
+    >>> from owslib.csw import CswRecord
+    >>> import six
+
 Initialize CSW client
 
     # connect to CSW, explore it's properties
@@ -117,4 +119,8 @@ Initialize CSW client
     True
     >>> c.results['nextrecord'] == 11
     True
-    
+    >>> key, rec = c.records.popitem()
+    >>> isinstance(rec, CswRecord)
+    True
+    >>> isinstance(rec.xml, six.string_types)
+    True

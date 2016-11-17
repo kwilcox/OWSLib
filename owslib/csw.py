@@ -700,9 +700,9 @@ class CswRecord(object):
     def __init__(self, record):
 
         if hasattr(record, 'getroot'):  # standalone document
-            self.xml = etree.tostring(record.getroot())
+            self.xml = util.element_to_string(record.getroot(), encoding='utf-8')
         else:  # part of a larger document
-            self.xml = etree.tostring(record)
+            self.xml = util.element_to_string(record, encoding='utf-8')
 
         # check to see if Dublin Core record comes from
         # rdf:RDF/rdf:Description container

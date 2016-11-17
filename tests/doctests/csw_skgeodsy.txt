@@ -18,4 +18,8 @@ True
 True
 >>> c.results.get('matches') > 0
 True
-
+>>> key, rec = c.records.popitem()
+>>> isinstance(rec, CswRecord)
+True
+>>> isinstance(rec.xml, six.string_types)
+True

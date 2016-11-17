@@ -2,6 +2,8 @@
 >>> from __future__ import (absolute_import, division, print_function)
 >>> from owslib.csw import CatalogueServiceWeb
 >>> from owslib import fes
+>>> from owslib.csw import CswRecord
+>>> import six
 
 >>> c = CatalogueServiceWeb('http://geomatics.nlr.nl/excat/csw')
 
@@ -68,6 +70,8 @@ Traceback (most recent call last):
 ExceptionReport: 'Operation not supported: GetDomain'
 
 >>> c.getrecordbyid(['DGFKRYMCWUZSCDRBWRXMIETZE'])
-
-#>>> c.records['DGFKRYMCWUZSCDRBWRXMIETZE'].title
-#'CERISE: Computationally Efficient Radar Image Simulation Environment'
+>>> key, rec = c.records.popitem()
+>>> isinstance(rec, CswRecord)
+True
+>>> isinstance(rec.xml, six.string_types)
+True

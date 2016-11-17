@@ -408,6 +408,7 @@ def element_to_string(element, encoding=None, xml_declaration=False):
     if etree.__name__ == 'lxml.etree':
         if xml_declaration:
             if encoding in ['unicode', 'utf-8']:
+                encoding = 'utf-8'
                 output = '<?xml version="1.0" encoding="utf-8" standalone="no"?>\n%s' % \
                        etree.tostring(element, encoding='unicode')
             else:
@@ -420,6 +421,11 @@ def element_to_string(element, encoding=None, xml_declaration=False):
                    etree.tostring(element, encoding=encoding))
         else:
             output = etree.tostring(element)
+
+    try:
+        output = output.decode(encoding)
+    except (AttributeError, NameError, LookupError):
+        pass
 
     return output
 

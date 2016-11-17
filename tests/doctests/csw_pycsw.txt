@@ -2,14 +2,15 @@ Imports
 
     >>> from __future__ import (absolute_import, division, print_function)
     >>> from owslib.csw import CatalogueServiceWeb as cs
-
+    >>> from owslib.csw import CswRecord
+    >>> import six
 
 Properties
 
     >>> c = cs('http://demo.pycsw.org/cite/csw')
     >>> c.version
     '2.0.2'
-    
+
     >>> c.identification.title
     'pycsw OGC CITE demo and Reference Implementation'
 
@@ -24,4 +25,9 @@ GetRecords
     >>> c.results.get('nextrecord') > 0
     True
     >>> c.results.get('matches') > 0
+    True
+    >>> key, rec = c.records.popitem()
+    >>> isinstance(rec, CswRecord)
+    True
+    >>> isinstance(rec.xml, six.string_types)
     True
